@@ -3,7 +3,6 @@
   <el-collapse-item name="1">
     <template slot="title">
       {{setItem.modalName}}
-      <i class="iconfont icon-biaoti"></i>
     </template>
 
     <!-- 显示标题 -->
@@ -26,7 +25,7 @@
       <div slot="select">{{setItem.position}}</div>
     </chart-base-select>
 
-    <!-- 自定义位置 -->
+    <!-- Custom位置 -->
     <el-row v-if="title.position.value === 'custom'">
       <!-- 左边距偏移量 -->
       <chart-base-slider
@@ -48,7 +47,6 @@
 <script>
 import * as t from "@/utils/importUtil";
 import { positionOption } from "@/data/chartJson";
-import transCN from "@/data/cn";
 import transEN from "@/data/en";
 
 export default {
@@ -59,17 +57,13 @@ export default {
     titleOption: Object,
     lang: {
       type: String,
-      default: "cn",
+      default: "en",
     },
   },
   components: {
     ...t.importComp(t),
   },
   mounted() {
-    if (this.lang == "ch") {
-      this.setItem = transCN["chartTitle"];
-      return;
-    }
     this.setItem = transEN["chartTitle"];
   },
   data: function () {
@@ -109,10 +103,6 @@ export default {
       immediate: true,
     },
     lang(val) {
-      if (val == "ch") {
-        this.setItem = transCN["chartTitle"];
-        return;
-      }
       this.setItem = transEN["chartTitle"];
     },
   },

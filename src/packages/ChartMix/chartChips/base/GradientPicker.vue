@@ -209,7 +209,7 @@
 
               <el-row v-if="gradientType=='radial'">
                 <el-col :span="4">
-                  <span style="line-height:38px;">X轴</span>
+                  <span style="line-height:38px;">X-axis</span>
                 </el-col>
                 <el-col :span="20">
                   <el-slider
@@ -228,7 +228,7 @@
 
               <el-row v-if="gradientType=='radial'">
                 <el-col :span="4">
-                  <span style="line-height:38px;">Y轴</span>
+                  <span style="line-height:38px;">Y-axis</span>
                 </el-col>
                 <el-col :span="20">
                   <el-slider
@@ -641,7 +641,7 @@ export default {
       maxSelectionSize: 8,
       cancelText: '取消',
       chooseText: '确定颜色',
-      togglePaletteMoreText: '自定义',
+      togglePaletteMoreText: 'Custom',
       togglePaletteLessText: '收起',
       togglePaletteOnly: false,
       clearText: '清除颜色选择',

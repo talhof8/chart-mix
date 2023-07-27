@@ -3,10 +3,10 @@
     <div style="overflow: hidden;height: 100%;">
       <!-- 图表类型 -->
       <chart-list
-        :chartAllType="currentChartType"
-        @closeChartShowList="showList=false"
-        :showList="showList"
-        :lang="lang"
+          :chartAllType="currentChartType"
+          @closeChartShowList="showList=false"
+          :showList="showList"
+          :lang="lang"
       ></chart-list>
       <!-- 数据选择框 -->
       <div>
@@ -16,7 +16,7 @@
           <el-tab-pane name="data">
             <span slot="label">
               <i class="el-icon-date"></i>
-              {{setItem.data}}
+              {{ setItem.data }}
             </span>
 
             <el-row>
@@ -25,31 +25,32 @@
               </el-col>
               <el-col :span="22">
                 <!-- 图表类型 -->
-                <div style="margin-top: 1px;">{{setItem.chartType}}</div>
+                <div style="margin-top: 1px;">{{ setItem.chartType }}</div>
                 <div style="margin-top: 10px;">
                   <el-button @click="showList = !showList" size="small" style="width:100%;">
                     <i :class="chartTypeTxt[0]" class="iconfont" style="float:left;"></i>
-                    {{chartTypeTxt[1]}}
+                    {{ chartTypeTxt[1] }}
                     <i
-                      class="iconfont icon-jiantou"
-                      style="float:right;"
+                        class="iconfont icon-jiantou"
+                        style="float:right;"
                     ></i>
                   </el-button>
                 </div>
 
                 <div style="margin-top:25px;"></div>
-                <!-- X轴 -->
+                <!-- X-axis -->
                 <div v-if="chartXYSeriesList">
                   <div
-                    :key="item.title"
-                    style="margin-top: 10px;"
-                    v-for="item in chartXYSeriesList.fix"
+                      :key="item.title"
+                      style="margin-top: 10px;"
+                      v-for="item in chartXYSeriesList.fix"
                   >
                     <el-row :gutter="10">
                       <el-col
-                        :span="4"
-                        style="line-height: 28px;text-align:right;"
-                      >{{ item.title }}:</el-col>
+                          :span="4"
+                          style="line-height: 28px;text-align:right;"
+                      >{{ item.title }}:
+                      </el-col>
                       <el-col :span="20">
                         <el-tag size="medium" style="width:100%;text-align:center;">
                           <i :class="item.type" class="iconfont" style="float:left;"></i>
@@ -61,45 +62,45 @@
                 </div>
 
                 <div style="margin-top:25px;"></div>
-                <!-- 系列 -->
+                <!-- Series -->
                 <div v-if="chartXYSeriesList">
                   <div
-                    :key="index"
-                    style="margin-top: 10px;"
-                    v-for="(item,index) in chartXYSeriesList.change"
+                      :key="index"
+                      style="margin-top: 10px;"
+                      v-for="(item,index) in chartXYSeriesList.change"
                   >
                     <el-row :gutter="10">
-                      <el-col :span="4" style="line-height: 28px;text-align:right;">{{item.title}}:</el-col>
+                      <el-col :span="4" style="line-height: 28px;text-align:right;">{{ item.title }}:</el-col>
                       <el-col :span="20">
                         <el-dropdown
-                          @command="handleSeriseCommand"
-                          size="medium"
-                          style="width:100%;"
-                          trigger="click"
+                            @command="handleSeriesCommand"
+                            size="medium"
+                            style="width:100%;"
+                            trigger="click"
                         >
                           <el-button size="mini" style="width:100%;">
                             <i
-                              :class="item.type"
-                              class="iconfont"
-                              style="float:left;font-size:16px;"
+                                :class="item.type"
+                                class="iconfont"
+                                style="float:left;font-size:16px;"
                             ></i>
-                            {{item.field}}
+                            {{ item.field }}
                             <i
-                              class="iconfont icon-jiantou"
-                              style="float:right;"
+                                class="iconfont icon-jiantou"
+                                style="float:right;"
                             ></i>
                           </el-button>
                           <el-dropdown-menu slot="dropdown" style="min-width:306px;">
                             <el-dropdown-item
-                              :command="{series:item, option:ditem}"
-                              :key="`A-${index}`"
-                              v-for="(ditem,index) in chartXYSeriesList.option"
+                                :command="{series:item, option:ditem}"
+                                :key="`A-${index}`"
+                                v-for="(ditem,index) in chartXYSeriesList.option"
                             >
-                              {{ditem.field}}
+                              {{ ditem.field }}
                               <i
-                                class="iconfont icon-dagou"
-                                style="float:right;"
-                                v-if="item.id==ditem.id"
+                                  class="iconfont icon-dagou"
+                                  style="float:right;"
+                                  v-if="item.id==ditem.id"
                               ></i>
                             </el-dropdown-item>
                           </el-dropdown-menu>
@@ -114,21 +115,24 @@
                 <el-row>
                   <div style="margin: 25px 0;"></div>
                   <el-checkbox
-                    @change="checkBoxChange"
-                    v-model="currentRangeConfigCheck"
-                  >{{setItem.transpose}}</el-checkbox>
+                      @change="checkBoxChange"
+                      v-model="currentRangeConfigCheck"
+                  >{{ setItem.transpose }}
+                  </el-checkbox>
                   <div style="margin: 15px 0;"></div>
                   <el-checkbox
-                    :disabled="checkRowDisabled"
-                    @change="checkBoxChange"
-                    v-model="currentRangeRowCheck.exits"
-                  >{{setItem.row1}} {{getColRowCheckTxt(true)}} {{setItem.row2}}</el-checkbox>
+                      :disabled="checkRowDisabled"
+                      @change="checkBoxChange"
+                      v-model="currentRangeRowCheck.exits"
+                  >{{ setItem.row1 }} {{ getColRowCheckTxt(true) }} {{ setItem.row2 }}
+                  </el-checkbox>
                   <div style="margin: 15px 0;"></div>
                   <el-checkbox
-                    :disabled="checkColDisabled"
-                    @change="checkBoxChange"
-                    v-model="currentRangeColCheck.exits"
-                  >{{setItem.column1}} {{getColRowCheckTxt()}} {{setItem.column2}}</el-checkbox>
+                      :disabled="checkColDisabled"
+                      @change="checkBoxChange"
+                      v-model="currentRangeColCheck.exits"
+                  >{{ setItem.column1 }} {{ getColRowCheckTxt() }} {{ setItem.column2 }}
+                  </el-checkbox>
                 </el-row>
               </el-col>
             </el-row>
@@ -138,7 +142,7 @@
           <el-tab-pane>
             <span slot="label">
               <i class="el-icon-s-data"></i>
-              {{setItem.style}}
+              {{ setItem.style }}
             </span>
 
             <el-row>
@@ -149,42 +153,42 @@
                 <el-collapse>
                   <!-- 标题组件 -->
                   <chart-title
-                    :router="'title'"
-                    :chartAllType="currentChartType"
-                    :titleOption="titleOption"
-                    :lang="lang"
+                      :router="'title'"
+                      :chartAllType="currentChartType"
+                      :titleOption="titleOption"
+                      :lang="lang"
                   ></chart-title>
 
                   <chart-sub-title
-                    :router="'subtitle'"
-                    :chartAllType="currentChartType"
-                    :subTitleOption="subTitleOption"
-                    :lang="lang"
+                      :router="'subtitle'"
+                      :chartAllType="currentChartType"
+                      :subTitleOption="subTitleOption"
+                      :lang="lang"
                   ></chart-sub-title>
 
                   <!-- 鼠标提示组件 -->
                   <chart-cursor
-                    :router="'tooltip'"
-                    :chartAllType="currentChartType"
-                    :cursorOption="cursorOption"
-                    :lang="lang"
+                      :router="'tooltip'"
+                      :chartAllType="currentChartType"
+                      :cursorOption="cursorOption"
+                      :lang="lang"
                   ></chart-cursor>
 
                   <!-- 图例组件 -->
                   <chart-legend
-                    :router="'legend'"
-                    :chartAllType="currentChartType"
-                    :legendOption="legendOption"
-                    :lang="lang"
+                      :router="'legend'"
+                      :chartAllType="currentChartType"
+                      :legendOption="legendOption"
+                      :lang="lang"
                   ></chart-legend>
 
                   <!-- 坐标轴组件 -->
                   <chart-axis
-                    v-if="currentChartType.split('|')[1]!='pie'"
-                    :router="'axis'"
-                    :axisOption="axisOption"
-                    :chartAllType="currentChartType"
-                    :lang="lang"
+                      v-if="currentChartType.split('|')[1]!='pie'"
+                      :router="'axis'"
+                      :axisOption="axisOption"
+                      :chartAllType="currentChartType"
+                      :lang="lang"
                   ></chart-axis>
                 </el-collapse>
               </el-col>
@@ -206,14 +210,11 @@ import ChartList from "./ChartList";
 // const ChartCursor = () => import("./chartChips/chart/ChartCursor");
 // const ChartLegend = () => import("./chartChips/chart/ChartLegend");
 // const ChartAxis = () => import("./chartChips/chart/ChartAxis");
-
-import { deepCopy } from "@/utils/util";
-import { checkCurrentBoxChange, changeSeriesOrder } from "@/utils/chartUtil";
+import {deepCopy} from "@/utils/util";
+import {changeSeriesOrder, checkCurrentBoxChange} from "@/utils/chartUtil";
 // import { isEqual } from "lodash";
-import isEqual from 'lodash/isEqual';
-import { chartComponent, chartOptions } from "@/data/chartJson";
-import { mapState, mapActions } from "vuex";
-import transCN from "@/data/cn";
+import {chartComponent} from "@/data/chartJson";
+import {mapActions, mapState} from "vuex";
 import transEN from "@/data/en";
 
 import ChartTitle from './chartChips/chart/ChartTitle'
@@ -239,23 +240,23 @@ export default {
     },
     lang: {
       type: String,
-      default: "cn",
+      default: "en",
     },
   },
   data() {
     return {
-      currentChartType: "echarts|line|default", //图表类型
+      currentChartType: "echarts|line|default",
       chart_id: '',
-      titleOption: deepCopy(chartComponent.title), //标题设置
-      subTitleOption: deepCopy(chartComponent.subtitle), //标题设置
-      cursorOption: deepCopy(chartComponent.tooltip), //鼠标提示设置
-      legendOption: deepCopy(chartComponent.legend), //图例设置
-      axisOption: deepCopy(chartComponent.axis), //坐标轴设置
+      titleOption: deepCopy(chartComponent.title),
+      subTitleOption: deepCopy(chartComponent.subtitle),
+      cursorOption: deepCopy(chartComponent.tooltip),
+      legendOption: deepCopy(chartComponent.legend),
+      axisOption: deepCopy(chartComponent.axis),
       showList: false,
       setItem: {
         echarts: {
           line: {
-            default: '默认折线图'
+            default: 'Default Line Chart'
           }
         }
       },
@@ -263,20 +264,14 @@ export default {
     };
   },
   mounted() {
-    if (this.lang == "ch") {
-      this.setItem = transCN["chartSetting"];
-      return;
-    }
     this.setItem = transEN["chartSetting"];
-    console.dir(this.setItem);
   },
   watch: {
     chartOptions: {
       handler: function (chartOption, oldV) {
-        //此处必须使用function,不能用箭头函数
         if (
-          chartOption == undefined ||
-          !chartOption.hasOwnProperty("chartAllType")
+            chartOption == undefined ||
+            !chartOption.hasOwnProperty("chartAllType")
         ) {
           return;
         }
@@ -290,10 +285,6 @@ export default {
       },
     },
     lang(val) {
-      if (val == "ch") {
-        this.setItem = transCN["chartSetting"];
-        return;
-      }
       this.setItem = transEN["chartSetting"];
     },
   },
@@ -302,32 +293,32 @@ export default {
     currentRangeColCheck: {
       get() {
         if (this.currentChartIndex == null) {
-          return { exits: false, range: [0, 0] };
+          return {exits: false, range: [0, 0]};
         }
         return this.chartLists[this.currentChartIndex].chartOptions
-          .rangeColCheck;
+            .rangeColCheck;
       },
       set(val) {
-        this.updateChartItemChartlistOne({ key: "rangeColCheck", value: val, chart_id: this.chart_id });
+        this.updateChartItemChartlistOne({key: "rangeColCheck", value: val, chart_id: this.chart_id});
       },
     },
     currentRangeRowCheck: {
       get() {
         if (this.currentChartIndex == null) {
-          return { exits: false, range: [0, 0] };
+          return {exits: false, range: [0, 0]};
         }
         return this.chartLists[this.currentChartIndex].chartOptions
-          .rangeRowCheck;
+            .rangeRowCheck;
       },
       set(val) {
-        this.updateChartItemChartlistOne({ key: "rangeRowCheck", value: val, chart_id: this.chart_id });
+        this.updateChartItemChartlistOne({key: "rangeRowCheck", value: val, chart_id: this.chart_id});
       },
     },
     checkRowDisabled() {
       if (
-        this.currentChartIndex == null ||
-        !this.chartLists[this.currentChartIndex].chartOptions.chartData ||
-        this.chartLists[this.currentChartIndex].chartOptions.chartData.length ==
+          this.currentChartIndex == null ||
+          !this.chartLists[this.currentChartIndex].chartOptions.chartData ||
+          this.chartLists[this.currentChartIndex].chartOptions.chartData.length ==
           1
       ) {
         return true;
@@ -336,9 +327,9 @@ export default {
     },
     checkColDisabled() {
       if (
-        this.currentChartIndex == null ||
-        !this.chartLists[this.currentChartIndex].chartOptions.chartData ||
-        this.chartLists[this.currentChartIndex].chartOptions.chartData.length ==
+          this.currentChartIndex == null ||
+          !this.chartLists[this.currentChartIndex].chartOptions.chartData ||
+          this.chartLists[this.currentChartIndex].chartOptions.chartData.length ==
           1
       ) {
         return true;
@@ -351,7 +342,7 @@ export default {
           return false;
         }
         return this.chartLists[this.currentChartIndex].chartOptions
-          .rangeConfigCheck;
+            .rangeConfigCheck;
       },
       set(val) {
         this.updateChartItemChartlistOne({
@@ -370,7 +361,6 @@ export default {
     chart_style() {
       return this.currentChartType.split("|")[2];
     },
-    //图表选项的文本
     chartTypeTxt: function () {
 
       var head, main, icon;
@@ -391,10 +381,10 @@ export default {
           main = this.setItem.echarts.line.label;
         }
         if (this.chart_style == "doublex") {
-          main = "双Y轴折线图";
+          main = "Double Y-axis Line Chart";
         }
         if (this.chart_style == "linemix") {
-          main = "折线柱状混合图";
+          main = "Line and Bar Mixed Chart";
         }
         icon = "icon-tubiaozhexiantu";
         return [icon, head + " - " + main];
@@ -406,7 +396,7 @@ export default {
           main = this.setItem.echarts.area.stack;
         }
         if (this.chart_style == "stackRatio") {
-          main = "带标签的堆叠面积图";
+          main = "Stacked Area Chart with Labels";
         }
         icon = "icon-fsux_tubiao_duijimianjitu";
         return [icon, head + " - " + main];
@@ -418,25 +408,25 @@ export default {
           main = this.setItem.echarts.column.stack;
         }
         if (this.chart_style == "stackRatio") {
-          main = "百分比堆叠柱状图";
+          main = "Percentage Stacked Column Chart";
         }
         if (this.chart_style == "costComposition") {
-          main = "费用构成柱状图";
+          main = "Cost Composition Column Chart";
         }
         if (this.chart_style == "polarStack") {
-          main = "极坐标系下的堆叠柱状图";
+          main = "Polar Stacked Column Chart";
         }
         if (this.chart_style == "bar3DPunchCard") {
-          main = "3D柱状图";
+          main = "3D Column Chart";
         }
         if (this.chart_style == "contain") {
-          main = "比例图";
+          main = "Proportion Chart";
         }
         if (this.chart_style == "special") {
-          main = "显示百分比图";
+          main = "Percentage Display Chart";
         }
         if (this.chart_style == "doubleX") {
-          main = "双X轴";
+          main = "Double X-axis Chart";
         }
         icon = "icon-chart";
         return [icon, head + " - " + main];
@@ -448,13 +438,13 @@ export default {
           main = this.setItem.echarts.bar.stack;
         }
         if (this.chart_style == "stackRatio") {
-          main = "百分比堆叠条形图";
+          main = "Percentage Stacked Bar Chart";
         }
         if (this.chart_style == "compare") {
-          main = "条形比较图";
+          main = "Bar Comparison Chart";
         }
         if (this.chart_style == "contain") {
-          main = "比例图";
+          main = "Proportion Chart";
         }
         icon = "icon-fsux_tubiao_duijizhuzhuangtu1";
         return [icon, head + " - " + main];
@@ -469,16 +459,16 @@ export default {
           main = this.setItem.echarts.pie.ring;
         }
         if (this.chart_style == "ringnest") {
-          main = "环形嵌套图";
+          main = "Nested Ring Chart";
         }
         if (this.chart_style == "3D") {
-          main = "3D饼图";
+          main = "3D Pie Chart";
         }
         if (this.chart_style == "rose") {
           if (this.chart_pro == "echarts") {
-            main = "南丁格玫瑰图";
+            main = "Rose Diagram";
           } else if (this.chart_pro == "highcharts") {
-            main = "可变宽度的环形图";
+            main = "Variable Width Donut Chart";
           }
         }
         icon = "icon-fsux_tubiao_nandingmeiguitu";
@@ -486,63 +476,63 @@ export default {
       }
       if (this.chart_type == "scatter") {
         if (this.chart_style == "default") {
-          main = "默认散点图";
+          main = "Default Scatter Plot";
         }
         if (this.chart_style == "label") {
-          main = "带标签的散点图";
+          main = "Scatter Plot with Labels";
         }
         if (this.chart_style == "zoom") {
-          main = "自由缩放散点图";
+          main = "Zoomable Scatter Plot";
         }
         if (this.chart_style == "matrix") {
-          main = "散点图矩阵";
+          main = "Scatter Plot Matrix";
         }
         icon = "icon-fsux_tubiao_qipaotu";
         return [icon, head + " - " + main];
       }
       if (this.chart_type == "radar") {
         if (this.chart_style == "default") {
-          main = "默认雷达图";
+          main = "Default Radar Chart";
         }
         icon = "icon-leidatu";
         return [icon, head + " - " + main];
       } else if (this.chart_type == "funnel") {
         if (this.chart_style == "default") {
-          main = "默认漏斗图";
+          main = "Default Funnel Chart";
         }
         if (this.chart_style == "inverse") {
-          main = "逆漏斗图";
+          main = "Inverse Funnel Chart";
         }
         icon = "icon-fsux_tubiao_loudoutu";
         return [icon, head + " - " + main];
       } else if (this.chart_type == "gauge") {
         if (this.chart_style == "default") {
-          main = "仪表盘";
+          main = "Gauge Chart";
         }
         if (this.chart_style == "percent") {
-          main = "百分比仪表盘";
+          main = "Percentage Gauge Chart";
         }
         if (this.chart_style == "solid") {
-          main = "活动图";
+          main = "Activity Chart";
         }
         icon = "icon-fsux_tubiao_yibiaopan";
         return [icon, head + " - " + main];
       } else if (this.chart_type == "map") {
         if (this.chart_style == "china") {
-          main = "中国地图";
+          main = "China Map";
         } else if (this.chart_style == "province") {
-          main = "省份地图";
+          main = "Province Map";
         } else if (this.chart_style == "cnscatter") {
-          main = "中国地图散点图";
+          main = "China Map Scatter Plot";
         } else if (this.chart_style == "pvscatter") {
-          main = "省份地图散点图";
+          main = "Province Map Scatter Plot";
         } else if (this.chart_style == "percent") {
-          main = "百分比地图";
+          main = "Percentage Map";
         }
         icon = "icon-fsux_tubiao_ditu";
         return [icon, head + " - " + main];
       } else if (this.chart_type == "earth") {
-        return [icon, head + " - " + "3D 地球"];
+        return [icon, head + " - " + "3D Earth"];
       }
     },
     currentChartDataCache() {
@@ -551,23 +541,19 @@ export default {
         return null;
       }
       return this.chartLists[this.currentChartIndex].chartOptions
-        .chartDataCache;
-      // },
-      // set(val) {
-      //   this.updateChartItemChartlistOne({ key: "rangeColCheck", val });
-      // },
+          .chartDataCache;
     },
     chartXYSeriesList() {
       if (this.currentChartDataCache == null) {
         return;
       }
       let chartDataSeriesOrder = this.chartLists[this.currentChartIndex]
-        .chartOptions.chartDataSeriesOrder;
+          .chartOptions.chartDataSeriesOrder;
 
       var chartAllTypeArray = this.currentChartType.split("|");
       var chartPro = chartAllTypeArray[0],
-        chartType = chartAllTypeArray[1],
-        chartStyle = chartAllTypeArray[2];
+          chartType = chartAllTypeArray[1],
+          chartStyle = chartAllTypeArray[2];
 
       var valueType = {
         num: "icon-shuzi",
@@ -575,16 +561,16 @@ export default {
         date: "icon-date",
       };
 
-      var ret = { fix: [], change: [], option: [] };
+      var ret = {fix: [], change: [], option: []};
       if (
-        chartType == "line" ||
-        chartType == "column" ||
-        chartType == "area" ||
-        chartType == "scatter"
+          chartType == "line" ||
+          chartType == "column" ||
+          chartType == "area" ||
+          chartType == "scatter"
       ) {
         if (this.currentChartDataCache.title != null) {
           ret.fix.push({
-            title: "x轴",
+            title: "X-axis",
             type: valueType["string"],
             field: this.currentChartDataCache.title.text,
           });
@@ -594,7 +580,7 @@ export default {
           for (var i = 0; i < this.currentChartDataCache.label.length; i++) {
             var trueIndex = chartDataSeriesOrder[i];
             ret.change[trueIndex] = {
-              title: "系列" + (trueIndex + 1),
+              title: "Series" + (trueIndex + 1),
               index: trueIndex,
               type: valueType[this.currentChartDataCache.series_tpye[i]],
               field: this.currentChartDataCache.label[i],
@@ -618,7 +604,7 @@ export default {
           return {};
         }
         return this.chartLists[this.currentChartIndex].chartOptions
-          .chartDataSeriesOrder;
+            .chartDataSeriesOrder;
       },
       set(val) {
         this.updateChartItemChartlistOne({
@@ -641,34 +627,34 @@ export default {
       if (!isRow) {
         var txt = "";
         if (
-          this.currentRangeColCheck.range[0] ==
-          this.currentRangeColCheck.range[1]
+            this.currentRangeColCheck.range[0] ==
+            this.currentRangeColCheck.range[1]
         ) {
           txt = this.currentRangeColCheck.range[0] + 1;
         } else {
           txt =
-            this.currentRangeColCheck.range[0] +
-            1 +
-            "至" +
-            (this.currentRangeColCheck.range[1] + 1) +
-            "";
+              this.currentRangeColCheck.range[0] +
+              1 +
+              "to" +
+              (this.currentRangeColCheck.range[1] + 1) +
+              "";
         }
 
         return txt;
       } else {
         var txt = "";
         if (
-          this.currentRangeRowCheck.range[0] ==
-          this.currentRangeRowCheck.range[1]
+            this.currentRangeRowCheck.range[0] ==
+            this.currentRangeRowCheck.range[1]
         ) {
           txt = this.currentRangeRowCheck.range[0] + 1;
         } else {
           txt =
-            this.currentRangeRowCheck.range[0] +
-            1 +
-            "至" +
-            (this.currentRangeRowCheck.range[1] + 1) +
-            "";
+              this.currentRangeRowCheck.range[0] +
+              1 +
+              "to" +
+              (this.currentRangeRowCheck.range[1] + 1) +
+              "";
         }
 
         return txt;
@@ -677,27 +663,26 @@ export default {
     // 转置行列操作
     checkBoxChange: function () {
       var chart_id = this.chartLists[this.currentChartIndex].chartOptions
-        .chart_id;
+          .chart_id;
       var rangeRowCheck = this.currentRangeRowCheck;
       var rangeColCheck = this.currentRangeColCheck;
       var rangeConfigCheck = this.currentRangeConfigCheck;
 
       checkCurrentBoxChange(
-        chart_id,
-        rangeRowCheck,
-        rangeColCheck,
-        rangeConfigCheck
+          chart_id,
+          rangeRowCheck,
+          rangeColCheck,
+          rangeConfigCheck
       );
     },
-    //系列列表的下拉菜单操作
-    handleSeriseCommand: function (command) {
+    handleSeriesCommand: function (command) {
       var series = command.series,
-        option = command.option;
+          option = command.option;
       var newOrder = deepCopy(this.currentChartDataSeriesOrder);
       var newid = option.id,
-        newTrueIndex = series.index;
+          newTrueIndex = series.index;
       var exchangeid = series.id,
-        exchangeTrueIndex = newOrder[newid];
+          exchangeTrueIndex = newOrder[newid];
 
       newOrder[newid] = newTrueIndex;
       newOrder[exchangeid] = exchangeTrueIndex;
@@ -705,8 +690,8 @@ export default {
       this.currentChartDataSeriesOrder = newOrder;
 
       changeSeriesOrder(
-        this.chartLists[this.currentChartIndex].chartOptions,
-        this.currentChartDataSeriesOrder
+          this.chartLists[this.currentChartIndex].chartOptions,
+          this.currentChartDataSeriesOrder
       );
     },
   },

@@ -2,7 +2,6 @@
   <el-collapse-item name="6">
     <template slot="title">
       {{setItem.modalName}}
-      <i class="iconfont icon-biaoti"></i>
     </template>
     <!-- 选择坐标轴 -->
     <chart-base-select :selectOption="axisGroup" :selectValue.sync="axis.axisType">
@@ -155,7 +154,7 @@
         <div slot="title">{{setItem.rotate}}</div>
       </chart-base-slider>
 
-      <!-- Y轴有数据编辑 -->
+      <!-- Y-axis有数据编辑 -->
       <div v-show="showLabel">
         <!-- 刻度最小值 -->
         <chart-base-input
@@ -229,7 +228,7 @@
         >
           <div slot="select">{{setItem.netInterval}}</div>
         </chart-base-select>
-        <!-- 自定义间隔数 -->
+        <!-- Custom间隔数 -->
         <chart-base-slider
           v-if="series.netLine.interval.value == 'custom'"
           :baseSliderOption.sync="series.netLine.interval.cusNumber"
@@ -250,7 +249,7 @@
         >
           <div slot="select">{{setItem.areaInterval}}</div>
         </chart-base-select>
-        <!-- 自定义间隔数 -->
+        <!-- Custom间隔数 -->
         <chart-base-slider
           v-if="series.netArea.interval.value == 'custom'"
           :baseSliderOption.sync="series.netArea.interval.cusNumber"
@@ -282,7 +281,6 @@ import {
   digitOption,
   ratioOption,
 } from "@/data/chartJson";
-import transCN from "@/data/cn";
 import transEN from "@/data/en";
 
 export default {
@@ -293,7 +291,7 @@ export default {
     router: String,
     lang: {
       type: String,
-      default: "cn",
+      default: "en",
     },
   },
   components: {
@@ -302,20 +300,20 @@ export default {
   data() {
     return {
       axis: {},
-      series: {}, //具体坐标轴配置
+      series: {},
       fontSizeOption: "",
       lineStyleOption: "",
       ratioOption: "",
       digitOption: "",
       fzPosOption: [
-        { value: "middle", label: "居中" },
-        { value: "start", label: "头部" },
-        { value: "end", label: "尾部" },
-        { value: "hidden", label: "隐藏" },
+        { value: "middle", label: "Middle" },
+        { value: "start", label: "Start" },
+        { value: "end", label: "End" },
+        { value: "hidden", label: "Hidden" },
       ],
       orient: [
-        { label: "朝内", value: "inside" },
-        { label: "朝外", value: "outside" },
+        { label: "Inside", value: "inside" },
+        { label: "Outside", value: "outside" },
       ],
       formatRotation: function (val) {
         return val + " °";
@@ -324,10 +322,6 @@ export default {
     };
   },
   mounted() {
-    if (this.lang == "ch") {
-      this.setItem = transCN["chartAxis"];
-      return;
-    }
     this.setItem = transEN["chartAxis"];
   },
   watch: {
@@ -358,10 +352,6 @@ export default {
       immediate: true,
     },
     lang(val) {
-      if (val == "ch") {
-        this.setItem = transCN["chartAxis"];
-        return;
-      }
       this.setItem = transEN["chartAxis"];
     },
   },
@@ -375,24 +365,24 @@ export default {
     axisGroup() {
       if (this.chartType == "bar" && this.chartStyle != "compare") {
         return [
-          { value: "xAxisDown", label: "Y轴(左侧垂直)" },
-          { value: "xAxisUp", label: "Y轴(左侧垂直)" },
-          { value: "yAxisLeft", label: "X轴(下方水平)" },
-          { value: "yAxisRight", label: "X轴(上方水平)" },
+          { value: "xAxisDown", label: "Y axis (left vertical)" },
+          { value: "xAxisUp", label: "Y axis (left vertical)" },
+          { value: "yAxisLeft", label: "X axis (horizontal below)" },
+          { value: "yAxisRight", label: "X axis (horizontal above)" },
         ];
-      } else if (this.chartStyle == "compare") {
+      } else if (this. chartStyle == "compare") {
         return [
-          { value: "xAxisDown", label: "Y轴(右侧坐标轴)" },
-          { value: "xAxisUp", label: "Y轴(左侧坐标轴)" },
-          { value: "yAxisLeft", label: "X轴(右侧坐标轴)" },
-          { value: "yAxisRight", label: "X轴(左侧坐标轴)" },
+          { value: "xAxisDown", label: "Y axis (right axis)" },
+          { value: "xAxisUp", label: "Y axis (left axis)" },
+          { value: "yAxisLeft", label: "X axis (right axis)" },
+          { value: "yAxisRight", label: "X axis (left axis)" },
         ];
       } else {
         return [
-          { value: "xAxisDown", label: "X轴(下方水平)" },
-          { value: "xAxisUp", label: "X轴(上方水平)" },
-          { value: "yAxisLeft", label: "Y轴(左侧垂直)" },
-          { value: "yAxisRight", label: "Y轴(右侧垂直)" },
+          { value: "xAxisDown", label: "X axis (horizontal below)" },
+          { value: "xAxisUp", label: "X axis (horizontal above)" },
+          { value: "yAxisLeft", label: "Y axis (left vertical)" },
+          { value: "yAxisRight", label: "Y axis (right vertical)" },
         ];
       }
     },

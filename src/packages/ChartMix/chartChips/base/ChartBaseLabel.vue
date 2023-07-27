@@ -19,7 +19,7 @@
                 </el-row>
             </el-col>
         </el-row>
-        <!-- 自定义字体大小 -->
+        <!-- Custom字体大小 -->
         <chart-base-slider v-if="baseLabelOptionData.fontSize === 'custom'" :baseSliderOption.sync="baseLabelOptionData.cusFontSize" :unit="'px'" :content="'滑动修改字体大小'"></chart-base-slider>
     </div>
 </template>

@@ -352,7 +352,7 @@ const option = {
         "defaultOption": {
             "title": {
                 "show": false,
-                "text": "默认标题",
+                "text": "Default title",
                 "label": {
                     "fontSize": 12,
                     "color": "#333",
@@ -503,7 +503,7 @@ const option = {
                         },
                         "fzPosition": "end"
                     },
-                    "name": "显示X轴",
+                    "name": "Display X-axis",
                     "inverse": false,
                     "tickLine": {
                         "show": true,
@@ -575,7 +575,7 @@ const option = {
                         },
                         "fzPosition": "end"
                     },
-                    "name": "显示X轴",
+                    "name": "Display X-axis",
                     "inverse": false,
                     "tickLine": {
                         "show": true,
@@ -650,7 +650,7 @@ const option = {
                         },
                         "fzPosition": "end"
                     },
-                    "name": "显示Y轴",
+                    "name": "Display Y-axis",
                     "inverse": false,
                     "tickLine": {
                         "show": true,
@@ -726,7 +726,7 @@ const option = {
                         },
                         "fzPosition": "end"
                     },
-                    "name": "显示Y轴",
+                    "name": "Display Y-axis",
                     "inverse": false,
                     "tickLine": {
                         "show": true,
@@ -1214,7 +1214,7 @@ export default {
                 "defaultOption": {
                     "title": {
                         "show": false,
-                        "text": "默认标题",
+                        "text": "Default title",
                         "label": {
                             "fontSize": 12,
                             "color": "#333",
@@ -1365,7 +1365,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示X轴",
+                            "name": "Display X-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -1437,7 +1437,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示X轴",
+                            "name": "Display X-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -1512,7 +1512,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示Y轴",
+                            "name": "Display Y-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -1588,7 +1588,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示Y轴",
+                            "name": "Display Y-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -2071,7 +2071,7 @@ export default {
                 "defaultOption": {
                     "title": {
                         "show": false,
-                        "text": "默认标题",
+                        "text": "Default title",
                         "label": {
                             "fontSize": 12,
                             "color": "#333",
@@ -2222,7 +2222,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示X轴",
+                            "name": "Display X-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -2294,7 +2294,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示X轴",
+                            "name": "Display X-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -2369,7 +2369,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示Y轴",
+                            "name": "Display Y-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -2445,7 +2445,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示Y轴",
+                            "name": "Display Y-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -2928,7 +2928,7 @@ export default {
                 "defaultOption": {
                     "title": {
                         "show": false,
-                        "text": "默认标题",
+                        "text": "Default title",
                         "label": {
                             "fontSize": 12,
                             "color": "#333",
@@ -3079,7 +3079,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示X轴",
+                            "name": "Display X-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -3151,7 +3151,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示X轴",
+                            "name": "Display X-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -3226,7 +3226,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示Y轴",
+                            "name": "Display Y-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,
@@ -3302,7 +3302,7 @@ export default {
                                 },
                                 "fzPosition": "end"
                             },
-                            "name": "显示Y轴",
+                            "name": "Display Y-axis",
                             "inverse": false,
                             "tickLine": {
                                 "show": true,

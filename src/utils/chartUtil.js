@@ -30,6 +30,14 @@ const setChartOptionsByRouter = function (chartOptions, router, updateObj) {
         if (routerArray.length != 0) {
             return deepFind(curObj[routerArray.shift()]);
         } else {
+            if (!curObj) {
+                curObj = {};
+            }
+
+            if (!updateObj) {
+                updateObj = {};
+            }
+
             Object.assign(curObj, updateObj);
             return curObj;
         }
@@ -224,7 +232,7 @@ const transLineStyle = function (width, color, type = "solid") {
 };
 
 /**
- 自定义* custom数据
+ Custom* custom数据
  */
 const transCustom = function (a, b) {
     if (a != "custom") {
@@ -253,7 +261,7 @@ const changeChangeAllType = function (chart_json, chartAllType) {
     var defaultOptionIni = chart_json.defaultOption;
     defaultOptionIni.series = [];
 
-    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的系列和轴控件。
+    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的Series和轴控件。
     var chartDataCache = getChartDataCache(
         chart_json.chartData,
         chart_json.rangeSplitArray,
@@ -264,11 +272,11 @@ const changeChangeAllType = function (chart_json, chartAllType) {
     // console.dir(chartDataCache)
     updateJson.chartDataCache = chartDataCache;
 
-    //生成默认的系列顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
+    //生成默认的Series顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
     var chartDataSeriesOrder = getChartDataSeriesOrder(chartDataCache.series[0].length);
     updateJson.chartDataSeriesOrder = chartDataSeriesOrder;
 
-    //根据图表的默认设置、图表数据、图表系列顺序，等到一个完整的图表配置串。
+    //根据图表的默认设置、图表数据、图表Series顺序，等到一个完整的图表配置串。
     var defaultOption = addDataToOption(
         defaultOptionIni,
         chartDataCache,
@@ -334,7 +342,7 @@ const checkCurrentBoxChange = function (chart_id, rangeRowCheck, rangeColCheck, 
     renderChart({ chartOptions: updateJson, chart_id: chart_id });
 };
 
-//系列数据顺序变化
+//Series数据顺序变化
 const changeSeriesOrder = function (chart_json, chartDataSeriesOrder) {
     if (chart_json == null) {
         return;
@@ -396,16 +404,16 @@ function changeChartRange(chart_id, chartData, rangeArray, rangeTxt) {
     var rangeSplitArray = getRangeSplitArray(chartData, rangeArray, rangeColCheck, rangeRowCheck);
     chart_json.rangeSplitArray = rangeSplitArray;
 
-    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的系列和轴控件。
+    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的Series和轴控件。
     var chartDataCache = getChartDataCache(chartData, rangeSplitArray, chartPro, chartType, chartStyle);
     chart_json.chartDataCache = chartDataCache;
 
-    //生成默认的系列顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
+    //生成默认的Series顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
     var chartDataSeriesOrder = getChartDataSeriesOrder(chartDataCache.series[0].length);
     chart_json.chartDataSeriesOrder = chartDataSeriesOrder;
 
     var defaultOptionIni = chart_json.defaultOption;
-    //根据图表的默认设置、图表数据、图表系列顺序，等到一个完整的图表配置串。
+    //根据图表的默认设置、图表数据、图表Series顺序，等到一个完整的图表配置串。
 
     var defaultOption = addDataToOption(
         defaultOptionIni,
@@ -448,17 +456,17 @@ function changeChartCellData(chart_id, chartData) {
     var rangeSplitArray = getRangeSplitArray(chartData, chart_json.rangeArray, rangeColCheck, rangeRowCheck);
     chart_json.rangeSplitArray = rangeSplitArray;
 
-    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的系列和轴控件。
+    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的Series和轴控件。
     var chartDataCache = getChartDataCache(chartData, rangeSplitArray, chartPro, chartType, chartStyle);
     chart_json.chartDataCache = chartDataCache;
 
-    //��成默认的系列顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
+    //��成默认的Series顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
     var chartDataSeriesOrder = getChartDataSeriesOrder(chartDataCache.series[0].length);
     chart_json.chartDataSeriesOrder = chartDataSeriesOrder;
 
     var defaultOptionIni = chart_json.defaultOption;
 
-    //根据图表的默认设置、图表数据、图表系列顺序，等到一个完整的图表配置串。
+    //根据图表的默认设置、图表数据、图表Series顺序，等到一个完整的图表配置串。
 
     var defaultOption = addDataToOption(
         defaultOptionIni,

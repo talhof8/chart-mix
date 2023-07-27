@@ -2,8 +2,7 @@
   <!-- 副标题设置 -->
   <el-collapse-item name="2">
     <template slot="title">
-      {{setItem.modalName}}&nbsp;&nbsp;&nbsp;&nbsp;
-      <i class="iconfont icon-biaoti"></i>
+      {{setItem.modalName}}
     </template>
 
     <!-- 副标题内容 -->
@@ -21,7 +20,7 @@
       <div slot="select">{{setItem.gap}}</div>
     </chart-base-select>
 
-    <!-- 自定义间距 -->
+    <!-- Custom间距 -->
     <chart-base-slider
       v-if="subTitle.distance.value === 'custom'"
       :baseSliderOption.sync="subTitle.distance.cusGap"
@@ -34,7 +33,6 @@
 <script>
 import * as t from "@/utils/importUtil";
 import { distanceOption } from "@/data/chartJson";
-import transCN from "@/data/cn";
 import transEN from "@/data/en";
 
 export default {
@@ -45,7 +43,7 @@ export default {
     subTitleOption: Object,
     lang: {
       type: String,
-      default: "cn",
+      default: "en",
     },
   },
   components: {
@@ -59,10 +57,6 @@ export default {
     };
   },
   mounted() {
-    if (this.lang == "ch") {
-      this.setItem = transCN["chartSubTitle"];
-      return;
-    }
     this.setItem = transEN["chartSubTitle"];
   },
   watch: {
@@ -87,10 +81,6 @@ export default {
       immediate: true,
     },
     lang(val) {
-      if (val == "ch") {
-        this.setItem = transCN["chartSubTitle"];
-        return;
-      }
       this.setItem = transEN["chartSubTitle"];
     },
   },

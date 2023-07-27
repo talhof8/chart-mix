@@ -39,7 +39,7 @@ const transformAxis = function(chartAllTypeArray , axis){
         },
         axisLabel: {
             show: true,
-            rotate: 0,
+            rotate: 45,
             formatter: null
         },
         min: null,
@@ -64,6 +64,8 @@ const transformAxis = function(chartAllTypeArray , axis){
     let transAxis = function(res , ori){
         let origin = deepCopy(axis[ori])
         res = $.extend(res , origin)
+        res.nameRotate = true;
+
         // axis.show
         res.show = origin.show
         // axis.name

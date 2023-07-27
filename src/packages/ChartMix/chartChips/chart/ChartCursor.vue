@@ -1,101 +1,100 @@
 <template>
   <el-collapse-item name="4">
     <template slot="title">
-      {{setItem.modalName}}
-      <i class="iconfont icon-biaoti"></i>
+      {{ setItem.modalName }}
     </template>
-    <!-- 显示提示框 -->
+    <!-- Display tooltip switch -->
     <chart-base-switch :switchValue.sync="cursor.show">
-      <div slot="title">{{setItem.show}}</div>
+      <div slot="title">{{ setItem.show }}</div>
     </chart-base-switch>
 
-    <!-- 提示框样式 -->
+    <!-- Tooltip style -->
     <chart-base-label :router="router + '/label'" :baseLabelOption="cursor.label">
-      <div slot="title">{{setItem.label}}</div>
+      <div slot="title">{{ setItem.label }}</div>
     </chart-base-label>
 
-    <!-- 背景颜色 -->
+    <!-- Background color -->
     <el-row style="margin-top: 10px;">
-      <el-col :span="6">{{setItem.background}}</el-col>
+      <el-col :span="6">{{ setItem.background }}</el-col>
       <el-col :span="3">
         <el-color-picker size="mini" v-model="cursor.backgroundColor"></el-color-picker>
       </el-col>
     </el-row>
 
-    <!-- 提示触发条件 -->
+    <!-- Tooltip trigger condition -->
     <chart-base-select :selectOption="triggerMethodArr" :selectValue.sync="cursor.triggerOn">
-      <div slot="select">{{setItem.trigger}}</div>
+      <div slot="select">{{ setItem.trigger }}</div>
     </chart-base-select>
 
-    <!-- 提示触发类型 -->
+    <!-- Tooltip trigger type -->
     <chart-base-select :selectOption="triggerTypeArr" :selectValue.sync="cursor.triggerType">
-      <div slot="select">{{setItem.type}}</div>
+      <div slot="select">{{ setItem.type }}</div>
     </chart-base-select>
 
-    <!-- 指示器配置 -->
+    <!-- Indicator configuration -->
     <div v-if="cursor.triggerType != 'item'">
       <chart-base-select
-        :selectOption="lineStyleOption"
-        :selectValue.sync="cursor.axisPointer.style.type"
+          :selectOption="lineStyleOption"
+          :selectValue.sync="cursor.axisPointer.style.type"
       >
-        <div slot="select">{{setItem.lineType}}</div>
+        <div slot="select">{{ setItem.lineType }}</div>
       </chart-base-select>
       <chart-base-select
-        :selectOption="lineWeightOption"
-        :selectValue.sync="cursor.axisPointer.style.width"
+          :selectOption="lineWeightOption"
+          :selectValue.sync="cursor.axisPointer.style.width"
       >
-        <div slot="select">{{setItem.lineWidth}}</div>
+        <div slot="select">{{ setItem.lineWidth }}</div>
       </chart-base-select>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6">{{setItem.color}}</el-col>
+        <el-col :span="6">{{ setItem.color }}</el-col>
         <el-col :span="3">
           <el-color-picker size="mini" v-model="cursor.axisPointer.style.color"></el-color-picker>
         </el-col>
       </el-row>
       <chart-base-select :selectOption="axisPointerArr" :selectValue.sync="cursor.axisPointer.type">
-        <div slot="select">{{setItem.axisType}}</div>
+        <div slot="select">{{ setItem.axisType }}</div>
       </chart-base-select>
     </div>
 
-    <!-- 提示框浮层位置 -->
+    <!-- Tooltip float position -->
     <chart-base-select
-      v-if="cursor.triggerType == 'item'"
-      :selectOption="posOption"
-      :selectValue.sync="cursor.position"
+        v-if="cursor.triggerType == 'item'"
+        :selectOption="posOption"
+        :selectValue.sync="cursor.position"
     >
-      <div slot="select">{{setItem.position}}</div>
+      <div slot="select">{{ setItem.position }}</div>
     </chart-base-select>
 
-    <!-- 鼠标提示format -->
+    <!-- Mouse tooltip format -->
     <el-row style="margin-top: 15px;">
       <el-col :span="2">
         <i class="el-icon-menu"></i>
       </el-col>
-      <el-col :span="8">{{setItem.suffix}}</el-col>
+      <el-col :span="8">{{ setItem.suffix }}</el-col>
     </el-row>
 
     <el-row :key="i" style="margin-top: 15px;" v-for="(item , i) in seriesOption">
-      <el-col :span="6">{{item}}</el-col>
+      <el-col :span="6">{{ item }}</el-col>
       <el-col :span="4">
-        <!-- 鼠标提示后缀 -->
+        <!-- Mouse tooltip suffix -->
         <chart-base-input :hideCol="true" :placeholder="setItem.placeholder"></chart-base-input>
       </el-col>
       <el-col :span="6">
-        <!-- 数值比例 -->
+        <!-- Value ratio -->
         <chart-base-select
-          :tooltip="setItem.ratio"
-          :selectOption="ratioOption"
-          :selectValue.sync="cursor.format[i].ratio"
-          :hideCol="true"
+            :tooltip="setItem.ratio"
+            :selectOption="ratioOption"
+            :selectValue.sync="cursor.format[i].ratio"
+            :hideCol="true"
         ></chart-base-select>
       </el-col>
       <el-col :span="6">
-        <!-- 小数位数 -->
+        <!-- Decimal places -->
         <chart-base-select
-          :tooltip="setItem.digit"
-          :selectOption="digitOption"
-          :selectValue.sync="cursor.format[i].digit"
-          :hideCol="true"
+            :tooltip="setItem.digit"
+            :selectOption="digitOption"
+            :selectValue.sync="cursor.format[i].digit"
+            :hideCol="true"
         ></chart-base-select>
       </el-col>
     </el-row>
@@ -103,6 +102,7 @@
 </template>
 
 <script>
+// Importing required dependencies and data
 import * as t from "@/utils/importUtil";
 import {
   fontSizeOption,
@@ -112,7 +112,6 @@ import {
   ratioOption,
   digitOption,
 } from "@/data/chartJson";
-import transCN from "@/data/cn";
 import transEN from "@/data/en";
 
 export default {
@@ -125,12 +124,12 @@ export default {
     cursorOption: Object,
     lang: {
       type: String,
-      default: "cn",
+      default: "en",
     },
   },
   data() {
     return {
-      cursor: {}, //鼠标提示设置
+      cursor: {}, // Tooltip settings
       fontSizeOption: t.deepCopy(fontSizeOption),
       lineStyleOption: t.deepCopy(lineStyleOption),
       lineWeightOption: t.deepCopy(lineWeightOption),
@@ -138,27 +137,23 @@ export default {
       ratioOption: t.deepCopy(ratioOption),
       digitOption: t.deepCopy(digitOption),
       triggerTypeArr: [
-        { value: "item", label: "数据项图形触发" },
-        { value: "axis", label: "坐标轴触发" },
+        { value: "item", label: "Item Graphic Trigger" },
+        { value: "axis", label: "Axis Trigger" },
       ],
       axisPointerArr: [
-        { value: "line", label: "直线指示器" },
-        { value: "shadow", label: "阴影指示器" },
-        { value: "cross", label: "十字准星指示器" },
+        { value: "line", label: "Straight Pointer" },
+        { value: "shadow", label: "Shadow Pointer" },
+        { value: "cross", label: "Crosshair Pointer" },
       ],
       triggerMethodArr: [
-        { value: "mousemove", label: "鼠标移动" },
-        { value: "click", label: "单击左键/鼠标划过" },
-        { value: "mousemove|click", label: "同时触发" },
+        { value: "mousemove", label: "Mouse Move" },
+        { value: "click", label: "Left Click / Mouse Hover" },
+        { value: "mousemove|click", label: "Simultaneous" },
       ],
       setItem: {},
     };
   },
   mounted() {
-    if (this.lang == "ch") {
-      this.setItem = transCN["chartCursor"];
-      return;
-    }
     this.setItem = transEN["chartCursor"];
   },
   watch: {
@@ -174,7 +169,7 @@ export default {
     },
     cursor: {
       handler: function (newVal, oldVal) {
-        // 改变值就重新渲染
+        // Re-render when values change
         if (oldVal) {
           this.changeCursor();
         }
@@ -183,10 +178,6 @@ export default {
       immediate: true,
     },
     lang(val) {
-      if (val == "ch") {
-        this.setItem = transCN["chartCursor"];
-        return;
-      }
       this.setItem = transEN["chartCursor"];
     },
   },

@@ -170,7 +170,7 @@ function insertNewChart(
     )
     chart_json.rangeSplitArray = rangeSplitArray
 
-    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的系列和轴控件。
+    //根据数据集、功能按钮状态、图表类型，得到图表可操作的数据格式，例如：{ "x":[], "y":[], series:[] }，可以按照次格式渲染数据页中的Series和轴控件。
     //数据为一行且为汉字的时候，chartDataCache的series为空数组
     var chartDataCache = getChartDataCache(
         chartData,
@@ -181,7 +181,7 @@ function insertNewChart(
     )
     chart_json.chartDataCache = chartDataCache
 
-    //生成默认的系列顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
+    //生成默认的Series顺序，默认根据series数组的位置，用户可以在界面上操作更改这个位置。
     var chartDataSeriesOrder = getChartDataSeriesOrder(
         chartDataCache.series[0].length
     )
@@ -191,7 +191,7 @@ function insertNewChart(
     //设置图表皮肤
     chart_json.chartTheme = chartTheme
 
-    //根据图表的默认设置、图表数据、图表系列顺序，等到一个完整的图表配置串。
+    //根据图表的默认设置、图表数据、图表Series顺序，等到一个完整的图表配置串。
     var defaultOption = addDataToOption(
         defaultOptionIni,
         chartDataCache,

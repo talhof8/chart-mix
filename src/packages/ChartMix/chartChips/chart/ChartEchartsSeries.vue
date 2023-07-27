@@ -1,12 +1,12 @@
 <template>
-  <el-collapse-item name="9" title="系列">
-    <!-- 系列设置 -->
+  <el-collapse-item name="9" title="Series">
+    <!-- Series设置 -->
 
     <el-row>
       <el-col :span="1">
         <i class="el-icon-menu"></i>
       </el-col>
-      <el-col :span="6" class="title">系列设置</el-col>
+      <el-col :span="6" class="title">Series Settings</el-col>
       <el-col :span="10">
         <el-select size="mini" v-model="seriesValue">
           <el-option :key="i" :label="item" :value="item" v-for="(item , i) in seriesOption"></el-option>
@@ -14,7 +14,7 @@
       </el-col>
     </el-row>
     <el-row style="margin-top: 15px;">
-      <el-col :span="6">类型</el-col>
+      <el-col :span="6">Type</el-col>
       <el-col :span="6">
         <el-select size="mini" v-model="type">
           <el-option
@@ -26,7 +26,7 @@
         </el-select>
       </el-col>
     </el-row>
-    <div v-show="seriesValue != '通用设置'">
+    <div v-show="seriesValue != 'General Settings'">
       <el-row style="margin-top: 15px;">
         <el-col :span="6">鼠标提示显示格式</el-col>
         <el-col :span="6">
@@ -41,7 +41,7 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6" class="title">鼠标提示格式</el-col>
+        <el-col :span="6" class="title">Mouse tooltip format</el-col>
         <el-col :span="6">
           <el-select @change="extpFormat" size="mini" v-model="series.tpDigit">
             <el-option
@@ -68,28 +68,28 @@
       </el-row>
     </div>
     <el-row style="margin-top: 15px;">
-      <el-col :span="6">Y轴主次坐标</el-col>
+      <el-col :span="6">Y axis primary and secondary coordinates</el-col>
       <el-col :span="10">
         <el-radio-group @change="exAxis" size="mini" v-model="series.radio">
-          <el-radio-button :label="0">主坐标轴(左侧)</el-radio-button>
-          <el-radio-button :label="1">次坐标轴(右侧)</el-radio-button>
+          <el-radio-button :label="0">Primary axis (left side)</el-radio-button>
+          <el-radio-button :label="1">Secondary axis (right side)</el-radio-button>
         </el-radio-group>
       </el-col>
     </el-row>
     <el-row style="margin-top: 15px;" v-show="chart_pro=='echarts'&&chart_type=='column'&&chart_style=='doubleX'">
-      <el-col :span="6">X轴主次坐标</el-col>
+      <el-col :span="6">X axis primary and secondary coordinates</el-col>
       <el-col :span="10">
         <el-radio-group @change="exXAxis" size="mini" v-model="series.xradio">
-          <el-radio-button :label="0">主坐标轴(下方)</el-radio-button>
-          <el-radio-button :label="1">次坐标轴(上侧)</el-radio-button>
+          <el-radio-button :label="0">Primary axis (lower side)</el-radio-button>
+          <el-radio-button :label="1">Secondary axis (upper side)</el-radio-button>
         </el-radio-group>
       </el-col>
       <el-col :span="3">
-        <el-button @click="addLevel">点击增加层级</el-button>
+        <el-button @click="addLevel">Click to add level</el-button>
       </el-col>
     </el-row>
     <el-row style="margin-top: 15px;">
-      <el-col :span="6">开启轮询</el-col>
+      <el-col :span="6">Polling type</el-col>
       <el-col :span="6">
         <el-switch
           @change="excirculation"
@@ -100,7 +100,7 @@
       </el-col>
     </el-row>
     <el-row style="margin-top: 15px;">
-      <el-col :span="6">轮询间隔时间</el-col>
+      <el-col :span="6">Polling interval</el-col>
       <el-col :span="6">
         <el-input @change="excirculation" size="mini" v-model="comCirculation.time"></el-input>秒
       </el-col>
@@ -108,7 +108,7 @@
     <!-- 折线图设置 -->
     <div v-show="type == 'line'">
       <el-row style="margin-top: 15px;">
-        <el-col :span="4">线条</el-col>
+        <el-col :span="4">Line</el-col>
         <el-col :span="5">
           <el-select @change="exlineWidth" size="mini" v-model="series.lineWidth">
             <el-option
@@ -131,8 +131,8 @@
         </el-col>
         <el-col :span="8">
           <el-checkbox-group @change="exlineStyle" size="mini" v-model="series.lineStyle">
-            <el-checkbox-button label="step">阶梯</el-checkbox-button>
-            <el-checkbox-button label="smooth">平滑</el-checkbox-button>
+            <el-checkbox-button label="step">Steps</el-checkbox-button>
+            <el-checkbox-button label="smooth">Smooth</el-checkbox-button>
           </el-checkbox-group>
         </el-col>
         <el-col :span="2">
@@ -155,7 +155,7 @@
         <el-col :span="1" class="input_content">px</el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6">数据点</el-col>
+        <el-col :span="6">Data point</el-col>
         <el-col :span="3">
           <el-switch
             @change="exshowSymbol"
@@ -207,13 +207,13 @@
     <!-- 柱状图设置 -->
     <div v-show="type == 'bar' || type == 'pictorialBar'">
       <el-row style="margin-top: 15px;">
-        <el-col :span="6">柱状图颜色</el-col>
+        <el-col :span="6">Bar color</el-col>
         <el-col :span="3">
           <gradient-picker @change="exbarColor" size="mini" v-model="series.barColor"></gradient-picker>
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6">柱状宽度</el-col>
+        <el-col :span="6">Bar width</el-col>
         <el-col :span="6">
           <el-select @change="exbarWidth" size="mini" v-model="series.barWidth">
             <el-option
@@ -241,7 +241,7 @@
         <el-col :span="1" class="input_content">px</el-col>
       </el-row>
       <el-row style="margin-top: 15px;" v-show="type == 'bar'">
-        <el-col :span="6">柱状图圆角大小</el-col>
+        <el-col :span="6">Bar corner radius</el-col>
         <el-col :span="8">
           <el-select @change="exborderRadius" size="mini" v-model="series.borderRadius">
             <el-option
@@ -256,7 +256,7 @@
       <div v-show="series.borderRadius == 'custom'">
         <el-row>
           <el-col :span="22">
-            <el-tooltip :open-delay="500" content="滑动修改左上圆角大小" placement="top">
+            <el-tooltip :open-delay="500" content="Slide to modify the size of the upper left corner" placement="top">
               <el-slider
                 :show-input-controls="false"
                 @change="excusBorderRadius"
@@ -271,7 +271,7 @@
         </el-row>
         <el-row>
           <el-col :span="22">
-            <el-tooltip :open-delay="500" content="滑动修改右上圆角大小" placement="top">
+            <el-tooltip :open-delay="500" content="Swipe to modify the size of the upper right corner" placement="top">
               <el-slider
                 :show-input-controls="false"
                 @change="excusBorderRadius"
@@ -286,7 +286,7 @@
         </el-row>
         <el-row>
           <el-col :span="22">
-            <el-tooltip :open-delay="500" content="滑动修改左下圆角大小" placement="top">
+            <el-tooltip :open-delay="500" content="Slide to modify the size of the lower left corner" placement="top">
               <el-slider
                 :show-input-controls="false"
                 @change="excusBorderRadius"
@@ -301,7 +301,7 @@
         </el-row>
         <el-row>
           <el-col :span="22">
-            <el-tooltip :open-delay="500" content="滑动修改右下圆角大小" placement="top">
+            <el-tooltip :open-delay="500" content="Swipe to modify the size of the lower right corner" placement="top">
               <el-slider
                 :show-input-controls="false"
                 @change="excusBorderRadius"
@@ -316,7 +316,7 @@
         </el-row>
       </div>
       <el-row style="margin-top: 15px;" v-show="type == 'pictorialBar'">
-        <el-col :span="6">柱状图形状</el-col>
+        <el-col :span="6">Bar shape</el-col>
         <el-col :span="6">
           <el-select @change="exsymbol1" size="mini" v-model="series.symbol1">
             <el-option
@@ -329,7 +329,7 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6">柱条最小高度</el-col>
+        <el-col :span="6">Bar minimum height</el-col>
         <el-col :span="6">
           <el-select @change="exbarMinHeight" size="mini" v-model="series.barMinHeight">
             <el-option
@@ -357,7 +357,7 @@
         <el-col :span="1" class="input_content">px</el-col>
       </el-row>
       <el-row style="margin-top: 15px;" v-show="!chart_style.includes('stack')">
-        <el-col :span="8">不同系列的柱间距离</el-col>
+        <el-col :span="8">Bar gap</el-col>
         <el-col :span="6">
           <el-select @change="exbarGap" size="mini" v-model="series.barGap">
             <el-option
@@ -386,7 +386,7 @@
         <el-col :span="1" class="input_content">%</el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="8">相同系列的柱间距离</el-col>
+        <el-col :span="8">Bar category gap</el-col>
         <el-col :span="6">
           <el-select @change="exbarCategoryGap" size="mini" v-model="series.barCategoryGap">
             <el-option
@@ -420,7 +420,7 @@
       <el-col :span="1">
         <i class="el-icon-menu"></i>
       </el-col>
-      <el-col :span="6" class="title">显示数据标签</el-col>
+      <el-col :span="6" class="title">Show data labels</el-col>
       <el-col :span="17">
         <el-switch
           @change="exshowLabel"
@@ -432,7 +432,7 @@
     </el-row>
     <div v-show="series.showLabel">
       <el-row style="margin-top: 15px;">
-        <el-col :span="6">标签显示格式</el-col>
+        <el-col :span="6">Label display format</el-col>
         <el-col :span="10">
           <el-select @change="exformatter" size="mini" v-model="series.formatter">
             <el-option
@@ -445,7 +445,7 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6" class="title">小数位数</el-col>
+        <el-col :span="6" class="title">Decimal places</el-col>
         <el-col :span="6">
           <el-select @change="exvalueDigit" size="mini" v-model="series.valueDigit">
             <el-option
@@ -458,7 +458,7 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6" class="title">数值比例</el-col>
+        <el-col :span="6" class="title">Value ratio</el-col>
         <el-col :span="6">
           <el-select @change="exvalueRatio" size="mini" v-model="series.valueRatio">
             <el-option
@@ -471,20 +471,20 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6" class="title">标签前缀</el-col>
+        <el-col :span="6" class="title">Prefix value</el-col>
         <el-col :span="18">
           <el-input @change="exprefixVal" size="mini" v-model="series.prefixVal"></el-input>
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
-        <el-col :span="6" class="title">标签后缀</el-col>
+        <el-col :span="6" class="title">Suffix value</el-col>
         <el-col :span="18">
           <el-input @change="exsuffixVal" size="mini" v-model="series.suffixVal"></el-input>
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;">
         <el-col :span="5">
-          <el-tooltip :open-delay="500" content="标签位置" placement="top">
+          <el-tooltip :open-delay="500" content="Label position" placement="top">
             <el-select @change="extextPos" size="mini" v-model="series.textPos">
               <el-option
                 :key="i"
@@ -518,7 +518,7 @@
       <div v-show="series.textPos == 'custom'">
         <el-row>
           <el-col :span="22">
-            <el-tooltip :open-delay="500" content="滑动修改水平距离" placement="top">
+            <el-tooltip :open-delay="500" content="Swipe to modify the horizontal distance" placement="top">
               <el-slider
                 :max="500"
                 :min="-200"
@@ -535,7 +535,7 @@
         </el-row>
         <el-row>
           <el-col :span="22">
-            <el-tooltip :open-delay="500" content="滑动修改垂直距离" placement="top">
+            <el-tooltip :open-delay="500" content="Swipe to modify the vertical distance" placement="top">
               <el-slider
                 :max="200"
                 :min="-200"
@@ -554,7 +554,7 @@
       <el-row v-if="series.fontSize == 'custom'">
         <el-col :span="22">
           <div class="input">
-            <el-tooltip :open-delay="500" content="滑动修改字体大小" placement="top">
+            <el-tooltip :open-delay="500" content="Swipe to modify font size" placement="top">
               <el-slider
                 :show-input-controls="false"
                 @change="excustomSize"
@@ -571,7 +571,7 @@
       <el-row style="margin-top: 15px;">
         <el-col :span="6">文字对齐方式</el-col>
         <el-col :span="5">
-          <el-tooltip :open-delay="500" content="文字水平对齐方式" placement="top">
+          <el-tooltip :open-delay="500" content="Text horizontal alignment" placement="top">
             <el-select @change="exalign" size="mini" v-model="series.align">
               <el-option
                 :key="i"
@@ -583,7 +583,7 @@
           </el-tooltip>
         </el-col>
         <el-col :span="5">
-          <el-tooltip :open-delay="500" content="文字垂直对齐方式" placement="top">
+          <el-tooltip :open-delay="500" content="Text vertical alignment" placement="top">
             <el-select @change="exverticalAlign" size="mini" v-model="series.verticalAlign">
               <el-option
                 :key="i"
@@ -634,7 +634,7 @@
         <el-col :span="1">
           <i class="el-icon-menu"></i>
         </el-col>
-        <el-col :span="6" class="title">设置为堆叠图</el-col>
+        <el-col :span="6" class="title">Set as a stacked chart</el-col>
         <el-col :span="17">
           <el-switch
             @change="exStack"
@@ -646,13 +646,13 @@
       </el-row>
       <div v-show="series.showStack">
         <el-row style="margin-top: 15px;">
-          <el-col :span="6" class="title">堆叠名称</el-col>
+          <el-col :span="6" class="title">Stack name</el-col>
           <el-col :span="17">
             <el-input @change="exstackValue" size="mini" v-model="series.stackValue"></el-input>
           </el-col>
         </el-row>
         <el-row style="margin-top: 15px;" v-show="type == 'bar'">
-          <el-col :span="6" class="title">类目间柱形距离</el-col>
+          <el-col :span="6" class="title">Gap between categories</el-col>
           <el-select @change="exbarCategoryGap " size="mini" v-model="series.barCategoryGap">
             <el-option
               :key="i"
@@ -685,7 +685,7 @@
         <el-col :span="1">
           <i class="el-icon-menu"></i>
         </el-col>
-        <el-col :span="6" class="title">设置为面积图</el-col>
+        <el-col :span="6" class="title">Set as area chart</el-col>
         <el-col :span="17">
           <el-switch
             @change="exArea"
@@ -696,7 +696,7 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 15px;" v-show="series.showArea">
-        <el-col :span="6" class="title">面积图覆盖颜色</el-col>
+        <el-col :span="6" class="title">Area color</el-col>
         <el-col :span="18">
           <gradient-picker @change="exArea" size="mini" v-model="series.areaColor"></gradient-picker>
         </el-col>
@@ -748,7 +748,7 @@ export default {
         showStack: false,
         showArea: false,
         formatter: "{c}",
-        stackValue: "默认类目",
+        stackValue: "Default category",
         barCategoryGap: "20%",
         cusbarCategoryGap: 0,
         areaColor: null,
@@ -785,12 +785,12 @@ export default {
         { value: 6, label: "6px" },
         { value: 7, label: "7px" },
         { value: 8, label: "8px" },
-        { value: "custom", label: "自定义" }
+        { value: "custom", label: "Custom" }
       ],
       lineTypeOption: [
-        { value: "solid", label: "实线" },
-        { value: "dashed", label: "虚线" },
-        { value: "dotted", label: "点线" }
+        { value: "solid", label: "Solid" },
+        { value: "dashed", label: "Dashed" },
+        { value: "dotted", label: "Dotted" }
       ],
       symbolSizeOption: [
         { value: 2, label: "2px" },
@@ -801,96 +801,96 @@ export default {
         { value: 12, label: "12px" },
         { value: 14, label: "14px" },
         { value: 16, label: "16px" },
-        { value: "custom", label: "自定义" }
+        { value: "custom", label: "Custom" }
       ],
       symbolOption: [
-        { value: "emptyCircle", label: "空心圆" },
-        { value: "circle", label: "圆" },
-        { value: "emptyRect", label: "空心矩形" },
-        { value: "rect", label: "矩形" },
-        { value: "roundRect", label: "圆角矩形" },
-        { value: "emptyTriangle", label: "空心三角" },
-        { value: "triangle", label: "三角形" },
-        { value: "emptyDiamond", label: "空心菱形" },
-        { value: "diamond", label: "菱形" },
-        { value: "pin", label: "标注" },
-        { value: "arrow", label: "箭头" },
-        { value: "line", label: "直线" }
+        { value: "emptyCircle", label: "Empty Circle" },
+        { value: "circle", label: "Circle" },
+        { value: "emptyRect", label: "Empty Rectangle" },
+        { value: "rect", label: "Rectangle" },
+        { value: "roundRect", label: "Rounded Rectangle" },
+        { value: "emptyTriangle", label: "Empty Triangle" },
+        { value: "triangle", label: "Triangle" },
+        { value: "emptyDiamond", label: "Empty Diamond" },
+        { value: "diamond", label: "Diamond" },
+        { value: "pin", label: "Pin" },
+        { value: "arrow", label: "Arrow" },
+        { value: "line", label: "Line" }
       ],
       symbolOption1: [
-        { value: "circle", label: "圆" },
-        { value: "rect", label: "矩形" },
-        { value: "roundRect", label: "圆角矩形" },
-        { value: "triangle", label: "三角形" },
-        { value: "diamond", label: "菱形" },
-        { value: "pin", label: "标注" },
-        { value: "arrow", label: "箭头" },
-        { value: "none", label: "无" }
+        { value: "circle", label: "Circle" },
+        { value: "rect", label: "Rectangle" },
+        { value: "roundRect", label: "Rounded Rectangle" },
+        { value: "triangle", label: "Triangle" },
+        { value: "diamond", label: "Diamond" },
+        { value: "pin", label: "Pin" },
+        { value: "arrow", label: "Arrow" },
+        { value: "none", label: "None" }
       ],
       barWidthOption: [
-        { value: null, label: "自适应" },
-        { value: 10, label: "窄" },
-        { value: 30, label: "一般" },
-        { value: 50, label: "宽" },
-        { value: "custom", label: "自定义" }
+        { value: null, label: "Auto" },
+        { value: 10, label: "Narrow" },
+        { value: 30, label: "Normal" },
+        { value: 50, label: "Wide" },
+        { value: "custom", label: "Custom" }
       ],
       barMinHeightOption: [
-        { value: 0, label: "默认" },
-        { value: 5, label: "矮" },
-        { value: 10, label: "一般" },
-        { value: 30, label: "高" },
-        { value: "custom", label: "自定义" }
+        { value: 0, label: "Default" },
+        { value: 5, label: "Short" },
+        { value: 10, label: "Normal" },
+        { value: 30, label: "Tall" },
+        { value: "custom", label: "Custom" }
       ],
       barGapOption: [
-        { value: "30%", label: "默认" },
-        { value: "50%", label: "远" },
-        { value: "40%", label: "一般" },
-        { value: "20%", label: "近" },
-        { value: "0%", label: "重叠" },
-        { value: "-10%", label: "交错" },
-        { value: "custom", label: "自定义" }
+        { value: "30%", label: "Default" },
+        { value: "50%", label: "Far" },
+        { value: "40%", label: "Normal" },
+        { value: "20%", label: "Near" },
+        { value: "0%", label: "Overlap" },
+        { value: "-10%", label: "Stagger" },
+        { value: "custom", label: "Custom" }
       ],
       valueRatioOption: [
-        { value: "100", label: "乘以100" },
-        { value: "10", label: "乘以10" },
-        { value: "1", label: "默认" },
-        { value: "0.1", label: "除以10" },
-        { value: "0.01", label: "除以100" },
-        { value: "0.001", label: "除以1000" },
-        { value: "0.0001", label: "除以一万" },
-        { value: "0.00001", label: "除以10万" },
-        { value: "0.000001", label: "除以一百万" },
-        { value: "0.0000001", label: "除以一千万" },
-        { value: "0.00000001", label: "除以一亿" },
-        { value: "0.000000001", label: "除以十亿" }
+        { value: "100", label: "Multiply by 100" },
+        { value: "10", label: "Multiply by 10" },
+        { value: "1", label: "Default" },
+        { value: "0.1", label: "Divide by 10" },
+        { value: "0.01", label: "Divide by 100" },
+        { value: "0.001", label: "Divide by 1000" },
+        { value: "0.0001", label: "Divide by ten thousand" },
+        { value: "0.00001", label: "Divide by hundred thousand" },
+        { value: "0.000001", label: "Divide by one million" },
+        { value: "0.0000001", label: "Divide by ten million" },
+        { value: "0.00000001", label: "Divide by one hundred million" },
+        { value: "0.000000001", label: "Divide by one billion" }
       ],
       valueDigitOption: [
-        { value: "default", label: "自动显示" },
-        { value: 0, label: "整数" },
-        { value: 1, label: "1位小数" },
-        { value: 2, label: "2位小数" },
-        { value: 3, label: "3位小数" },
-        { value: 4, label: "4位小数" },
-        { value: 5, label: "5位小数" },
-        { value: 6, label: "6位小数" },
-        { value: 7, label: "7位小数" },
-        { value: 8, label: "8位小数" }
+        { value: "default", label: "Auto Display" },
+        { value: 0, label: "Integer" },
+        { value: 1, label: "1 Decimal Place" },
+        { value: 2, label: "2 Decimal Places" },
+        { value: 3, label: "3 Decimal Places" },
+        { value: 4, label: "4 Decimal Places" },
+        { value: 5, label: "5 Decimal Places" },
+        { value: 6, label: "6 Decimal Places" },
+        { value: 7, label: "7 Decimal Places" },
+        { value: 8, label: "8 Decimal Places" }
       ],
       textPosOption: [
-        { value: "top", label: "顶端" },
-        { value: "left", label: "左侧" },
-        { value: "right", label: "右侧" },
-        { value: "bottom", label: "底部" },
-        { value: "inside", label: "内部居中" },
-        { value: "insideLeft", label: "内部左侧" },
-        { value: "insideRight", label: "内部右侧" },
-        { value: "insideTop", label: "内部顶端" },
-        { value: "insideBottom", label: "内部底部" },
-        { value: "insideTopLeft", label: "内部左上" },
-        { value: "insideBottomLeft", label: "内部左下" },
-        { value: "insideTopRight", label: "内部右上" },
-        { value: "insideBottomRight", label: "内部右下" },
-        { value: "custom", label: "自定义" }
+        { value: "top", label: "Top" },
+        { value: "left", label: "Left" },
+        { value: "right", label: "Right" },
+        { value: "bottom", label: "Bottom" },
+        { value: "inside", label: "Inside Center" },
+        { value: "insideLeft", label: "Inside Left" },
+        { value: "insideRight", label: "Inside Right" },
+        { value: "insideTop", label: "Inside Top" },
+        { value: "insideBottom", label: "Inside Bottom" },
+        { value: "insideTopLeft", label: "Inside Top Left" },
+        { value: "insideBottomLeft", label: "Inside Bottom Left" },
+        { value: "insideTopRight", label: "Inside Top Right" },
+        { value: "insideBottomRight", label: "Inside Bottom Right" },
+        { value: "custom", label: "Custom" }
       ],
       fontSizeOption: [
         { value: 6, label: "6px" },
@@ -905,34 +905,34 @@ export default {
         { value: 24, label: "24px" },
         { value: 30, label: "30px" },
         { value: 36, label: "36px" },
-        { value: "custom", label: "自定义" }
+        { value: "custom", label: "Custom" }
       ],
       alignOption: [
-        { value: "left", label: "左对齐" },
-        { value: "center", label: "居中对齐" },
-        { value: "right", label: "右对齐" }
+        { value: "left", label: "Left Align" },
+        { value: "center", label: "Center Align" },
+        { value: "right", label: "Right Align" }
       ],
       verticalAlignOption: [
-        { value: "top", label: "底部对齐" },
-        { value: "middle", label: "居中对齐" },
-        { value: "bottom", label: "顶部对齐" },
-        { value: "custom", label: "自定义" }
+        { value: "top", label: "Top Align" },
+        { value: "middle", label: "Middle Align" },
+        { value: "bottom", label: "Bottom Align" },
+        { value: "custom", label: "Custom" }
       ],
       barCategoryGapOption: [
-        { value: "20%", label: "默认" },
-        { value: "40%", label: "远" },
-        { value: "30%", label: "一般" },
-        { value: "10%", label: "近" },
-        { value: "custom", label: "自定义" }
+        { value: "20%", label: "Default" },
+        { value: "40%", label: "Far" },
+        { value: "30%", label: "Normal" },
+        { value: "10%", label: "Near" },
+        { value: "custom", label: "Custom" }
       ],
       radiusOption: [
-        { value: 0, label: "默认无" },
-        { value: "custom", label: "自定义" }
+        { value: 0, label: "No Default" },
+        { value: "custom", label: "Custom" }
       ],
       tpFormatOption: [
-        { value: "{abc}", label: "系列名+数据名+数据" },
-        { value: "{bc}", label: "数据名+数据" },
-        { value: "{ac}", label: "系列名+数据" }
+        { value: "{abc}", label: "Series Name + Data Name + Data" },
+        { value: "{bc}", label: "Data Name + Data" },
+        { value: "{ac}", label: "Series Name + Data" }
       ]
     };
   },
@@ -983,7 +983,7 @@ export default {
         showStack: false,
         showArea: false,
         formatter: "{c}",
-        stackValue: "默认类目",
+        stackValue: "Default category",
         barCategoryGap: "20%",
         cusbarCategoryGap: 0,
         areaColor: null,
@@ -1072,7 +1072,7 @@ export default {
         showStack: false,
         showArea: false,
         formatter: "{c}",
-        stackValue: "默认类目",
+        stackValue: "Default category",
         barCategoryGap: "20%",
         cusbarCategoryGap: 0,
         areaColor: null,
@@ -1133,7 +1133,7 @@ export default {
           showStack: false,
           showArea: false,
           formatter: "{c}",
-          stackValue: "默认类目",
+          stackValue: "Default category",
           barCategoryGap: "20%",
           cusbarCategoryGap: 0,
           areaColor: null,
@@ -1193,7 +1193,7 @@ export default {
           showStack: true,
           showArea: false,
           formatter: "{c}",
-          stackValue: "默认类目",
+          stackValue: "Default category",
           barCategoryGap: "20%",
           cusbarCategoryGap: 0,
           areaColor: null,
@@ -1252,7 +1252,7 @@ export default {
           showStack: true,
           showArea: false,
           formatter: "{c}",
-          stackValue: "默认类目",
+          stackValue: "Default category",
           barCategoryGap: "20%",
           cusbarCategoryGap: 0,
           areaColor: null,
@@ -1331,7 +1331,7 @@ export default {
       var arr = [];
       for (var i = 0; i < series.length + 1; i++) {
         if (i == 0) {
-          arr[0] = "通用设置";
+          arr[0] = "General settings";
         } else {
           arr[i] = series[i - 1].name;
         }
@@ -1400,12 +1400,12 @@ export default {
     },
     typeOption() {
       if (this.chart_style == "costComposition") {
-        return [{ value: "bar", label: "柱状图" }];
+        return [{ value: "bar", label: "Bar" }];
       } else {
         return [
-          { value: "line", label: "折线图" },
-          { value: "bar", label: "柱状图" },
-          { value: "pictorialBar", label: "象形柱图" }
+          { value: "line", label: "Line" },
+          { value: "bar", label: "Bar" },
+          { value: "pictorialBar", label: "Pictorial bar" }
         ];
       }
     },
@@ -1440,15 +1440,15 @@ export default {
         return [
           { value: "{b}", label: "仅数据" },
           { value: "{c}", label: "仅百分比" },
-          { value: "{bc}", label: "系列名+百分比" },
+          { value: "{bc}", label: "Series名+百分比" },
           { value: "{pc}", label: "数据+百分比" },
           { value: "{prc}", label: "数据+人+百分比" },
-          { value: "{bcd}", label: "系列名+数据+百分比" }
+          { value: "{bcd}", label: "Series名+数据+百分比" }
         ];
       } else {
         return [
           { value: "{c}", label: "仅数据" },
-          { value: "{bc}", label: "系列名+数据" },
+          { value: "{bc}", label: "Series名+数据" },
           { value: "{percent}", label: "仅百分比" },
           { value: "{special}", label: "显示左侧百分比" }
         ];
@@ -1514,7 +1514,7 @@ export default {
         generator.changeChartOption();
       }
     },
-    // 当前系列的索引
+    // 当前Series的索引
     // sindex() {
     //   console.dir(this.seriesValue)
     //   var index = this.seriesOption.findIndex(item => {
@@ -1525,7 +1525,7 @@ export default {
     //   // }
     //   if (
     //     this.chart_style == 'costComposition' &&
-    //     this.seriesValue != '通用设置'
+    //     this.seriesValue != 'General settings'
     //   ) {
     //     index = 1
     //   }
@@ -1624,8 +1624,8 @@ export default {
         if (this.series.lineStyle.includes("smooth")) {
           smooth = true;
         }
-        // 折线图通用设置
-        if (this.seriesValue == "通用设置") {
+        // 折线图General settings
+        if (this.seriesValue == "General settings") {
           if (this.series.lineWidth != "custom") {
             this.$store.commit({
               type: "updateChartOptionItem",
@@ -1752,7 +1752,7 @@ export default {
       }
       // 柱状图设置
       if (this.type == "bar" || this.type == "pictorialBar") {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           if (this.series.barWidth != "custom") {
             this.$store.commit({
               type: "updateChartOptionItem",
@@ -1817,7 +1817,7 @@ export default {
           // }
         }
       }
-      // 通用设置
+      // General settings
       var fontWeight, fontStyle;
       if (this.series.fontPlace.indexOf("bold") > -1) {
         fontWeight = true;
@@ -2505,7 +2505,7 @@ export default {
         };
       }
 
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         var obj = {
           show: this.series.showLabel,
           fontSize: this.series.fontSize,
@@ -2591,7 +2591,7 @@ export default {
     //   var series = this.$store.state.chartSetting.chartList[
     //     this.$store.state.chartSetting.chartCurrent
     //   ].defaultOption.series
-    //   if (this.seriesValue == '通用设置') {
+    //   if (this.seriesValue == 'General settings') {
     //     for (var i = 0; i < series.length; i++) {
     //       series[i].type = newV
     //     }
@@ -2616,7 +2616,7 @@ export default {
     },
     excusLineWidth(newV) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2659,7 +2659,7 @@ export default {
     },
     excusSymbolSize(newV) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2703,7 +2703,7 @@ export default {
     },
     excusBarWidth(newV) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2736,7 +2736,7 @@ export default {
     exbarMinHeight(newV) {
       this.delMarkAdd();
       if (newV != "custom") {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -2756,7 +2756,7 @@ export default {
       }
     },
     excusBarMinHeight(newV) {
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2788,7 +2788,7 @@ export default {
     },
     exbarGap(newV) {
       if (newV != "custom") {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -2809,7 +2809,7 @@ export default {
     },
     excusBarGap(newV) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2848,7 +2848,7 @@ export default {
     },
     excusbarCategoryGap(val) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2927,7 +2927,7 @@ export default {
       if (this.series.fontPlace.indexOf("italic") > -1) {
         fontStyle = true;
       }
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -2948,7 +2948,7 @@ export default {
     exStack(newV) {
       this.normalMethod();
       if (!newV) {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -2964,7 +2964,7 @@ export default {
           });
         }
       } else {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -3000,7 +3000,7 @@ export default {
     },
     exstackValue(newV) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3027,7 +3027,7 @@ export default {
     },
     excusBarCategoryGap(newV) {
       this.normalMethod();
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3060,7 +3060,7 @@ export default {
     exArea(newV) {
       this.normalMethod();
       if (!newV) {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -3076,7 +3076,7 @@ export default {
           });
         }
       } else {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -3120,7 +3120,7 @@ export default {
       generator.changeChartOption();
     },
     excusAlign() {
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3141,7 +3141,7 @@ export default {
     },
     exverticalAlign(val) {
       if (val != "custom") {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -3162,7 +3162,7 @@ export default {
       this.delMarkAdd();
     },
     exAxis(val) {
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3182,7 +3182,7 @@ export default {
       generator.changeChartOption();
     },
     exXAxis(val) {
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3202,7 +3202,7 @@ export default {
       generator.changeChartOption();
     },
     addLevel(){
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3223,7 +3223,7 @@ export default {
     },
     exborderRadius(val) {
       if (val != "custom") {
-        if (this.seriesValue == "通用设置") {
+        if (this.seriesValue == "General settings") {
           this.$store.commit({
             type: "updateChartOptionItem",
             router: "series",
@@ -3244,7 +3244,7 @@ export default {
       this.delMarkAdd();
     },
     excusBorderRadius() {
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",
@@ -3274,7 +3274,7 @@ export default {
       generator.changeChartOption();
     },
     exsymbol1(val) {
-      if (this.seriesValue == "通用设置") {
+      if (this.seriesValue == "General settings") {
         this.$store.commit({
           type: "updateChartOptionItem",
           router: "series",

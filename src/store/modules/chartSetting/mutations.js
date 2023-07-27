@@ -23,7 +23,7 @@ export default {
     },
     /**
        *根据对象属性的路径, 更新图表子属性的方法
-      //自定义一种类型'router',updateObj内部也是采用颗粒更新的模式,防止全部替换chartOptions造成的chartsetting内部组件全局重刷
+      //Custom一种类型'router',updateObj内部也是采用颗粒更新的模式,防止全部替换chartOptions造成的chartsetting内部组件全局重刷
       params:{
           updateSubObj:{label:{},show:true,...} //子属性新的值
           router:'title/label' //属性路径
